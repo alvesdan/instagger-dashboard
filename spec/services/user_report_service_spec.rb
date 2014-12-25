@@ -7,8 +7,8 @@ RSpec.describe UserReportService do
 
   let(:user_media) do
     [
-      Instagram::Media.new({created_time: last_week, likes: {'count' => 15}, comments: {'count' => 10}}),
-      Instagram::Media.new({created_time: this_week, likes: {'count' => 10}, comments: {'count' => 5}})
+      Instagram::Media.new({created_time: last_week, likes: {'count' => 10}, comments: {'count' => 5}}),
+      Instagram::Media.new({created_time: this_week, likes: {'count' => 15}, comments: {'count' => 10}})
     ]
   end
 

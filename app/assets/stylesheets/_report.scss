@@ -1,0 +1,14 @@
+.week-row {
+  padding: 30px 0;
+  display: block;
+  text-align: center;
+  .week-resume {
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+    border-radius: 100px;
+    padding: 20px;
+    background: #ccc;
+    text-align: center;
+  }
+}

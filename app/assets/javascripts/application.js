@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require underscore
 //= require mustache
 //= require jquery.mustache
-//
 //= require report

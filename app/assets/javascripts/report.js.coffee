@@ -1,18 +1,39 @@
 class Report
-  template: '<table class="table table-bordered">
-    <tr>
-      <td>Posts</td>
-      <td>{{week_1_posts}}</td>
-      <td>{{week_2_posts}}</td>
-      <td>{{posts_variation}}</td>
-    </tr>
-    <tr>
-      <td>Likes</td>
-      <td>{{week_1_likes}}</td>
-      <td>{{week_2_likes}}</td>
-      <td>{{likes_variation}}</td>
-    </tr>
-  </table>'
+  template: '
+  <div class="week-row clearfix">
+    <div class="week-title">
+      {{weekOne.week_start}}-{{weekOne.week_end}} vs {{weekTwo.week_start}}-{{weekTwo.week_end}}
+    </div>
+    <div class="week-resume">
+      <div class="posts">
+        <small>Posts:</small>
+        {{weekOne.total_posts}}
+      </div>
+      <div class="likes">
+        <small>Likes:</small>
+        {{weekOne.total_likes}}
+      </div>
+      <div class="comments">
+        <small>Comments:</small>
+        {{weekOne.total_comments}}
+      </div>
+    </div>
+    <div class="week-resume">
+      <div class="posts">
+        <small>Posts:</small>
+        {{weekTwo.total_posts}}
+      </div>
+      <div class="likes">
+        <small>Likes:</small>
+        {{weekTwo.total_likes}}
+      </div>
+      <div class="comments">
+        <small>Comments:</small>
+        {{weekTwo.total_comments}}
+      </div>
+    </div>
+  </div>
+  '
 
   loadData: ->
     $.ajax
@@ -24,17 +45,12 @@ class Report
     data = @loadData()
     for slice in data
       view =
-        week_1_posts: slice.aggregate[1].total_posts
-        week_2_posts: slice.aggregate[0].total_posts
-        posts_variation: slice.variations.posts
-
-        week_1_likes: slice.aggregate[1].total_likes
-        week_2_likes: slice.aggregate[0].total_likes
-        likes_variation: slice.variations.likes
-
+        weekOne: _.first(slice.aggregate)
+        weekTwo: _.last(slice.aggregate)
+        variations: slice.variations
       table = Mustache.render(@template, view)
-      console.log(table)
       $('.report').append(table)
 
 $ ->
   window.report = new Report()
+  report.render()

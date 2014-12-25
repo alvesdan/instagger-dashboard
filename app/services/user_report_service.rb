@@ -2,7 +2,7 @@ class UserReportService < Struct.new(:user_media)
 
   def report
     ([]).tap do |result|
-      aggregate_numbers.each_cons(2) do |slice|
+      aggregate_numbers.reverse.each_cons(2) do |slice|
         result << {
           variations: build_result(slice),
           aggregate: slice
@@ -14,7 +14,8 @@ class UserReportService < Struct.new(:user_media)
   def aggregate_numbers
     @aggregate_numbers ||= grouped_user_media.map do |week, media|
       {
-        week: week,
+        week_start: format_date(media.first.created_at.beginning_of_week),
+        week_end: format_date(media.last.created_at.end_of_week),
         total_posts: media.size,
         total_likes: media.reduce(0) { |sum, m| sum += m.likes_count },
         total_comments: media.reduce(0) { |sum, m| sum += m.comments_count }
@@ -26,7 +27,7 @@ class UserReportService < Struct.new(:user_media)
 
   def grouped_user_media
     @grouped_user_media ||= user_media.group_by do |media|
-      media.created_at.strftime('%U')
+      media.created_at.strftime('%W')
     end
   end
 
@@ -41,5 +42,9 @@ class UserReportService < Struct.new(:user_media)
         [key, percentage]
       end
     ]
+  end
+
+  def format_date(date)
+    date.strftime('%d/%m')
   end
 end
