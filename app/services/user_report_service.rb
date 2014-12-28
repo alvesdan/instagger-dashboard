@@ -2,7 +2,7 @@ class UserReportService < Struct.new(:user_media)
 
   def report
     ([]).tap do |result|
-      aggregate_numbers.reverse.each_cons(2) do |slice|
+      aggregate_numbers.each_cons(2) do |slice|
         result << {
           variations: build_result(slice),
           aggregate: slice
@@ -25,10 +25,12 @@ class UserReportService < Struct.new(:user_media)
 
   private
 
+  def ordered_user_media
+    @ordered_user_media ||= user_media.sort_by(&:week_number)
+  end
+
   def grouped_user_media
-    @grouped_user_media ||= user_media.group_by do |media|
-      media.created_at.strftime('%W')
-    end
+    @grouped_user_media ||= ordered_user_media.group_by(&:week_number)
   end
 
   def build_result(slice)
@@ -37,9 +39,9 @@ class UserReportService < Struct.new(:user_media)
         key_symbol = "total_#{key}".to_sym
         first_slice_value = slice.first.fetch(key_symbol, 0).to_f
         last_slice_value = slice.last.fetch(key_symbol, 0).to_f
-        percentage = ((first_slice_value - last_slice_value) / last_slice_value) * 100
+        percentage = ((last_slice_value - first_slice_value) / first_slice_value) * 100
         percentage = (first_slice_value * 100) if percentage == Float::INFINITY
-        [key, percentage]
+        [key, percentage.round]
       end
     ]
   end
