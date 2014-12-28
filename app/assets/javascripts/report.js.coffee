@@ -2,7 +2,7 @@ class Report
   template: '
   <div class="week-row clearfix">
     <div class="week-title">
-      {{weekOne.week_start}}-{{weekOne.week_end}} vs {{weekTwo.week_start}}-{{weekTwo.week_end}}
+      {{weekOne.week_start}}-{{weekOne.week_end}} <span class="versus">and</span> {{weekTwo.week_start}}-{{weekTwo.week_end}}
     </div>
     <div class="week-resume">
       <div class="posts">
@@ -16,6 +16,17 @@ class Report
       <div class="comments">
         <small>Comments:</small>
         {{weekOne.total_comments}}
+      </div>
+    </div>
+    <div class="week-comparison">
+      <div class="posts">
+        {{variations.posts}}%
+      </div>
+      <div class="likes">
+        {{variations.likes}}%
+      </div>
+      <div class="comments">
+        {{variations.comments}}%
       </div>
     </div>
     <div class="week-resume">
