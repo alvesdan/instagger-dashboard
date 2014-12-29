@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-sm-12
+      .page-header
+        %h1 Hi
+        %p.lead Just log in to display data
+  .row
+    .col-sm-12
+      = link_to 'Sign in with Instagram', '/auth/instagram', class: 'btn btn-sm btn-primary'
+      %p.help-block Your data is not saved on our database at any time. When you sign out, all your data is purged.

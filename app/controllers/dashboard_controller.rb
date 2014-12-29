@@ -6,14 +6,6 @@ class DashboardController < ApplicationController
 
   private
 
-  def token
-    @token ||= session[:token]
-  end
-
-  def client
-    @client ||= Instagram.client(access_token: token)
-  end
-
   def user_media
     @user_media ||= Rails.cache.fetch(token, expires_in: 1.hour) do
       user_feed_service.user_media

@@ -1,4 +1,14 @@
 .container
   .row
     .col-sm-12
+      .page-header
+        %h1 Hi #{current_user.username}
+        %p.lead Displaying comparison data from the last 4 weeks
+  .row
+    .col-md-6.col-lg-4
       .report
+  .row
+    .col-xs-12
+      %hr
+      .footer
+        = link_to 'Exit', users_path, method: :delete, class: 'btn btn-xs btn-default'

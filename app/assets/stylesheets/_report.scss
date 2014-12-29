@@ -1,10 +1,10 @@
 .week-row {
   padding: 30px 0;
   display: block;
-  text-align: center;
-  max-width: 400px;
-  margin: 40px auto;
+  margin: 20px auto;
   background: #f4f4f4;
+  text-align: center;
+
   .week-title {
     font-size: 20px;
     font-weight: 300;
@@ -13,6 +13,7 @@
       text-transform: uppercase;
     }
   }
+
   .week-resume {
     display: inline-block;
     width: 140px;
@@ -26,10 +27,20 @@
       color: #ccc;
     }
   }
+
   .week-comparison {
     display: inline-block;
     .posts, .likes, .comments {
       line-height: 38px;
+      &.up { color: green; }
+      &.down { color: red; }
+      &.flat { color: orange; }
     }
+  }
+}
+
+.footer {
+  .btn {
+    text-transform: uppercase;
   }
 }

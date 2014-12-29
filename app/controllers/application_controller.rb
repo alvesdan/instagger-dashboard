@@ -14,4 +14,19 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     redirect_to new_user_path unless user_signed_in?
   end
+
+  def token
+    @token ||= session[:token]
+  end
+
+  def client
+    @client ||= Instagram.client(access_token: token)
+  end
+
+  def current_user
+    @current_user ||= Rails.cache.fetch([token, 'me'], expires_in: 1.hour) do
+      client.user
+    end
+  end
+  helper_method :current_user
 end

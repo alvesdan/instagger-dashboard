@@ -52,8 +52,12 @@ class Report
       async: false
     .responseJSON
 
+  emptyReport: ->
+    $('.report').html('<p>No data to display for the last 4 weeks.</p>')
+
   render: ->
     data = @loadData()
+    return @emptyReport() unless data.length
     for slice in data
       view =
         weekOne: _.first(slice.aggregate)
@@ -61,6 +65,17 @@ class Report
         variations: slice.variations
       table = Mustache.render(@template, view)
       $('.report').append(table)
+      @parseVariations()
+    null # return nothing
+
+  parseVariations: ->
+    $('.week-comparison').find('.posts, .likes, .comments').each ->
+      $this = $(this)
+      raw = $this.html().trim()
+      parsed = parseInt(raw.replace('%', ''))
+      klass = if parsed > 0 then 'up' else 'down'
+      klass = 'flat' if parsed == 0
+      $this.addClass(klass)
 
 $ ->
   window.report = new Report()
