@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe UserReportService do
 
   let(:this_week) { (DateTime.current - 1.day).to_i }
-  let(:last_week) { (DateTime.current - 1.week).to_i }
-  let(:two_weeks_ago) { (DateTime.current - 2.weeks).to_i }
+  let(:last_week) { (DateTime.current - 8.days).to_i }
+  let(:two_weeks_ago) { (DateTime.current - 16.days).to_i }
 
   let(:user_media) do
     [
