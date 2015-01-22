@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
   private
 
   def user_media
-    @user_media ||= Rails.cache.fetch(token, expires_in: 1.hour) do
+    @user_media ||= Rails.cache.fetch([token, 'user_media'], expires_in: 1.hour) do
       user_feed_service.user_media
     end
   end
@@ -19,4 +19,9 @@ class DashboardController < ApplicationController
   def user_report_service
     @user_report_service ||= UserReportService.new(user_media)
   end
+
+  def user_report_service_decorator
+    @user_report_service_decorator ||= ::UserReportServiceDecorator.new(user_report_service)
+  end
+  helper_method :user_report_service_decorator
 end

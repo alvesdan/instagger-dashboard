@@ -12,8 +12,8 @@ module Instagram
       comments['count']
     end
 
-    def week_number
-      created_at.strftime('%W')
+    def beginning_of_week
+      created_at.to_date.beginning_of_week.to_s
     end
   end
 end

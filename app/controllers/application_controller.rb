@@ -29,4 +29,12 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :current_user
+
+  def current_user_last_media
+    @current_user_last_media ||= Rails.cache.fetch([token, 'user_last_media'], expires_in: 1.hour) do
+      client.user_recent_media.first
+    end
+  end
+  helper_method :current_user_last_media
+
 end

@@ -1,42 +1,166 @@
-.week-row {
-  padding: 30px 0;
-  display: block;
-  margin: 20px auto;
-  background: #f4f4f4;
-  text-align: center;
+body {
+  background: #e2e2e2;
+}
+.global-wrapper {
+  width: 1000px;
+  margin: 40px auto;
+}
 
-  .week-title {
-    font-size: 20px;
-    font-weight: 300;
-    .versus {
-      color: #ccc;
-      text-transform: uppercase;
-    }
+.about {
+  width: 300px;
+  float: left;
+
+  .photo {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 2px 2px 0 0;
   }
 
-  .week-resume {
-    display: inline-block;
-    width: 140px;
-    height: 140px;
-    border-radius: 100px;
-    padding: 20px;
+  .info {
+    background: #fff;
+    border-radius: 0 0 2px 2px;
     text-align: center;
-    small {
+    position: relative;
+    padding-bottom: 30px;
+
+    .profile-picture {
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      position: absolute;
+      left: 50%;
+      margin-left: -50px;
+      top: -20px;
+    }
+
+    strong {
       display: block;
-      text-transform: uppercase;
-      color: #ccc;
+      padding-top: 90px;
+      font-size: 18px;
+      color: #0c52c4;
+    }
+  }
+}
+
+.report {
+  width: 690px;
+  float: right;
+  background: #fff;
+  border-radius: 2px;
+
+  header {
+    padding: 20px 20px 0 20px;
+    color: #13386f;
+    strong {
+      display: inline-block;
+      padding: 2px 6px;
+      border: 2px solid #eee;
+      border-radius: 2px;
     }
   }
 
-  .week-comparison {
-    display: inline-block;
-    .posts, .likes, .comments {
-      line-height: 38px;
-      &.up { color: green; }
-      &.down { color: red; }
-      &.flat { color: orange; }
+  .table-wrapper {
+    margin: 20px;
+    padding: 10px 20px;
+    background: #f9f9f9;
+  }
+  .table {
+    margin: 0;
+    font-weight: 300;
+    color: #0c3879;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: '+';
+      width: 40px;
+      height: 40px;
+      left: 50%;
+      margin-left: -20px;
+      top: 50%;
+      margin-top: -20px;
+      color: #0c57bc;
+      font-size: 40px;
+      text-align: center;
+      transform: rotate(45deg);
+      line-height: 30px;
+    }
+
+    tr:first-child {
+      td { border: 0; }
+    }
+    td {
+      text-align: center;
+      padding: 15px;
+      font-size: 18px;
+      .count {
+        font-weight: bold;
+      }
     }
   }
+}
+
+.graphics {
+  width: 690px;
+  float: right;
+  background: #fff;
+  border-radius: 2px;
+  margin-top: 10px;
+
+  .wrapper {
+    padding: 20px;
+  }
+
+  .posts, .likes, .comments {
+    float: left;
+    width: 32%;
+    text-align: center;
+    margin-right: 2%;
+    background: #f9f9f9;
+    padding: 40px 0;
+    font-size: 30px;
+    color: #0c3879;
+    position: relative;
+    font-weight: 300;
+
+    span {
+      font-size: 16px;
+    }
+    &.up {
+      span { color: #36ac58; }
+    }
+    &.down {
+      span { color: #e50720; }
+    }
+    .icon {
+      display: block;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      line-height: 8px;
+      span { color: #d6d8e5; }
+    }
+    .label {
+      display: block;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      text-transform: uppercase;
+      color: #d6d8e5;
+      font-weight: 300;
+      font-size: 12px;
+    }
+  }
+  .likes {
+    margin: 0;
+  }
+
 }
 
 .footer {

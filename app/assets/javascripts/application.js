@@ -17,4 +17,3 @@
 //= require underscore
 //= require mustache
 //= require jquery.mustache
-//= require report

@@ -1,0 +1,18 @@
+%table.table
+  %tr
+    %td
+      = fancy_pluralize user_report_service_decorator.week_one.total_posts, 'post'
+    %td
+      = fancy_pluralize user_report_service_decorator.week_two.total_posts, 'post'
+
+  %tr
+    %td
+      = fancy_pluralize user_report_service_decorator.week_one.total_comments, 'comment'
+    %td
+      = fancy_pluralize user_report_service_decorator.week_two.total_comments, 'comment'
+
+  %tr
+    %td
+      = fancy_pluralize user_report_service_decorator.week_one.total_likes, 'like'
+    %td
+      = fancy_pluralize user_report_service_decorator.week_two.total_likes, 'like'

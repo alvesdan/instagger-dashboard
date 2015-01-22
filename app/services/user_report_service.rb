@@ -1,14 +1,16 @@
 class UserReportService < Struct.new(:user_media)
 
   def report
-    ([]).tap do |result|
-      aggregate_numbers.each_cons(2) do |slice|
-        result << {
-          variations: build_result(slice),
-          aggregate: slice
-        } if slice.size > 1
-      end
-    end
+    result = {
+      variations: build_result(usable_data),
+      aggregate: usable_data
+    } if usable_data.size > 1
+
+    result || {}
+  end
+
+  def usable_data
+    @usable_data ||= aggregate_numbers.last(2)
   end
 
   def aggregate_numbers
@@ -26,11 +28,11 @@ class UserReportService < Struct.new(:user_media)
   private
 
   def ordered_user_media
-    @ordered_user_media ||= user_media.sort_by(&:week_number)
+    @ordered_user_media ||= user_media.sort_by(&:beginning_of_week)
   end
 
   def grouped_user_media
-    @grouped_user_media ||= ordered_user_media.group_by(&:week_number)
+    @grouped_user_media ||= ordered_user_media.group_by(&:beginning_of_week)
   end
 
   def build_result(slice)
