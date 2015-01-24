@@ -8,6 +8,8 @@ require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'webmock/rspec'
+require 'capybara/rspec'
+require 'rack_session_access/capybara'
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 

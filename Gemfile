@@ -31,6 +31,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'webmock'
+  gem 'capybara'
+  gem 'rack_session_access'
 end
 
 group :test do

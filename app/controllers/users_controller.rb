@@ -10,9 +10,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    Rails.cache.delete([token, 'me'])
-    Rails.cache.delete([token, 'user_media'])
-    Rails.cache.delete([token, 'user_last_media'])
+    purge_cache!
     session.delete(:token)
     redirect_to root_path
   end

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   rescue_from Instagram::BadRequest, with: :sign_out_user
 
   def user_signed_in?
-    session[:token].present?
+    token.present?
   end
   helper_method :user_signed_in?
 

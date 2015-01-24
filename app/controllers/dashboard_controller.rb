@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
-  respond_to :html, :json
+  respond_to :html
   def show
-    respond_with user_report_service.report
   end
 
   private
@@ -21,7 +20,7 @@ class DashboardController < ApplicationController
   end
 
   def user_report_service_decorator
-    @user_report_service_decorator ||= ::UserReportServiceDecorator.new(user_report_service)
+    @user_report_service_decorator ||= UserReportServiceDecorator.new(user_report_service)
   end
   helper_method :user_report_service_decorator
 end
