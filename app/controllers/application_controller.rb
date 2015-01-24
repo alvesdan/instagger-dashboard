@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :authenticate_user!
+  rescue_from Instagram::BadRequest, with: :sign_out_user
 
   def user_signed_in?
     session[:token].present?
@@ -36,5 +37,15 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :current_user_last_media
+
+  def sign_out_user
+    redirect_to '/sign-out'
+  end
+
+  def purge_cache!
+    Rails.cache.delete([token, 'me'])
+    Rails.cache.delete([token, 'user_media'])
+    Rails.cache.delete([token, 'user_last_media'])
+  end
 
 end
