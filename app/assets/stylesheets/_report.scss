@@ -1,4 +1,4 @@
-body {
+body.dashboard {
   background: #e2e2e2;
 }
 .global-wrapper {
@@ -43,7 +43,7 @@ body {
       display: block;
       padding-top: 90px;
       font-size: 18px;
-      color: #0c52c4;
+      color: $color-light-blue;
     }
   }
 }
@@ -56,7 +56,7 @@ body {
 
   header {
     padding: 20px 20px 0 20px;
-    color: #13386f;
+    color: $color-medium-blue;
     strong {
       display: inline-block;
       padding: 2px 6px;
@@ -73,7 +73,7 @@ body {
   .table {
     margin: 0;
     font-weight: 300;
-    color: #0c3879;
+    color: $color-dark-blue;
     position: relative;
 
     &:after {
@@ -112,6 +112,7 @@ body {
   background: #fff;
   border-radius: 2px;
   margin-top: 10px;
+  margin-bottom: 10px;
 
   .wrapper {
     padding: 20px;

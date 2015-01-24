@@ -9,12 +9,6 @@
             %strong= current_user.username
             %p= current_user.bio
 
-            .options
-              = link_to icon_tag('info-sign'), '#',
-                data: { toggle: 'popover',
-                content: 'Designed by Bruno Marinho and coded by Daniel Alves',
-                trigger: 'hover', container: 'body' }
-
         .report.clearfix
           %header.clearfix
             .pull-left
@@ -47,6 +41,9 @@
               = "#{user_report_service_decorator.variations.likes}%"
               .icon= icon_tag('heart')
               .label Likes
+
+        .text-right
+          = link_to 'Log Out', '/sign-out', class: 'text-danger'
 
 - content_for :after_javascript do
   :javascript

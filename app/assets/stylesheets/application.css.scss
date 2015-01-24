@@ -13,7 +13,14 @@
  *= require_self
  */
 
+$border-radius-base: 2px;
+$border-radius-large: 4px;
+$color-medium-blue: #13386f;
+$color-dark-blue: #0c3879;
+$color-light-blue: #0c52c4;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@import "sign_in";
 @import "report";
