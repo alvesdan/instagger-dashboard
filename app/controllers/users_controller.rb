@@ -10,20 +10,20 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    session.delete(:token)
     Rails.cache.delete([token, 'me'])
     Rails.cache.delete([token, 'user_media'])
     Rails.cache.delete([token, 'user_last_media'])
+    session.delete(:token)
     redirect_to root_path
   end
 
   private
 
   def auth_hash
-    request.env['omniauth.auth']
+    request.env.fetch('omniauth.auth')
   end
 
   def request_token
-    auth_hash['credentials']['token']
+    auth_hash.fetch('credentials').fetch('token')
   end
 end
