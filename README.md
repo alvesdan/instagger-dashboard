@@ -2,4 +2,4 @@
 
 Your weekly dose of Instagram statistics.
 
-![Preview](http://f.cl.ly/items/1R3T1w2H2b3s0P1F1b1J/Instagger.png)
+![Preview](http://f.cl.ly/items/0T0e3I1a2w3I3Q0O2j1Q/Instagger.png)
