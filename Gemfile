@@ -30,12 +30,12 @@ group :development, :test do
   gem 'pry'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'webmock'
-  gem 'capybara'
-  gem 'rack_session_access'
 end
 
 group :test do
   gem 'simplecov'
   gem 'vcr'
+  gem 'webmock'
+  gem 'capybara'
+  gem 'rack_session_access'
 end
