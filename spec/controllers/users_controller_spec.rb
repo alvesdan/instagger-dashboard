@@ -31,7 +31,6 @@ RSpec.describe UsersController do
       session[:token] = expected_token
       expect(Rails.cache).to receive(:delete).with([expected_token, 'me'])
       expect(Rails.cache).to receive(:delete).with([expected_token, 'user_media'])
-      expect(Rails.cache).to receive(:delete).with([expected_token, 'user_last_media'])
 
       get :destroy
     end

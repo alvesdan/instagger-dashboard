@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
       user_feed_service.user_media
     end
   end
+  helper_method :user_media
 
   def user_feed_service
     @user_feed_service ||= UserFeedService.new(client)

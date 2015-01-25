@@ -1,52 +1,47 @@
+.photo-set
+  - user_media.first(5).each do |media|
+    .photo{ style: "background-image:url(#{media.images.fetch('standard_resolution').fetch('url')})" }
+
 .container
   .row
     .col-sm-12
-      .global-wrapper.clearfix
-        .about.clearfix
-          .photo{ style: "background-image:url(#{current_user_last_media.images.standard_resolution.url})" }
-          .info
-            .profile-picture{ style: "background-image:url(#{current_user.profile_picture})" }
-            %strong= current_user.username
-            %p= current_user.bio
+      %header
+        .profile-picture{ style: "background-image:url(#{current_user.profile_picture})" }
 
-        .report.clearfix
-          %header.clearfix
-            .pull-left
-              %strong
-                %small Week
-                = user_report_service_decorator.week_title(:one)
-            .pull-right
-              %strong
-                %small Week
-                = user_report_service_decorator.week_title(:two)
-          .table-wrapper
-            = render 'data_table', user_report_service_decorator: user_report_service_decorator
+        %h1= current_user.username
+        %p= current_user.bio
 
-        .graphics
-          .wrapper.clearfix
-            .posts{ class: user_report_service_decorator.direction_for(:posts) }
-              = icon_tag user_report_service_decorator.icon_for(:posts)
-              = "#{user_report_service_decorator.variations.posts}%"
-              .icon= icon_tag('camera')
-              .label Posts
+      .report.clearfix
+        %header.clearfix
+          .pull-left
+            %strong
+              %small Week
+              = user_report_service_decorator.week_title(:one)
+          .pull-right
+            %strong
+              %small Week
+              = user_report_service_decorator.week_title(:two)
+        .table-wrapper
+          = render 'data_table', user_report_service_decorator: user_report_service_decorator
 
-            .comments{ class: user_report_service_decorator.direction_for(:comments) }
-              = icon_tag user_report_service_decorator.icon_for(:comments)
-              = "#{user_report_service_decorator.variations.comments}%"
-              .icon= icon_tag('comment')
-              .label Comments
+      .graphics
+        .wrapper.clearfix
+          = render 'dashboard/graphic', type: :posts, icon: 'camera'
+          = render 'dashboard/graphic', type: :comments, icon: 'comment'
+          = render 'dashboard/graphic', type: :likes, icon: 'heart'
 
-            .likes{ class: user_report_service_decorator.direction_for(:likes) }
-              = icon_tag user_report_service_decorator.icon_for(:likes)
-              = "#{user_report_service_decorator.variations.likes}%"
-              .icon= icon_tag('heart')
-              .label Likes
-
-        .text-right
-          = link_to 'Log Out', '/sign-out', class: 'text-danger'
+      .footer.text-center
+        %p
+          Design by
+          = link_to 'Bruno Marinho', 'http://www.brunomarinho.com/'
+          and code Daniel Alves.
+        :plain
+          <p>This application is
+            <a href="https://github.com/alvesdan/instagger-dashboard">open source</a>.</p>
+        = link_to 'Log Out', '/sign-out', class: 'text-danger btn btn-xs btn-default'
 
 - content_for :after_javascript do
   :javascript
     $(function () {
-      $('[data-toggle="popover"]').popover()
+      $('[data-toggle="popover"]').popover();
     })

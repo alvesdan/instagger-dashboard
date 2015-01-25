@@ -1,0 +1,5 @@
+%div{ class: [type, user_report_service_decorator.direction_for(type)] }
+  = icon_tag user_report_service_decorator.icon_for(type)
+  = "#{user_report_service_decorator.variations.send(type)}%"
+  .icon= icon_tag(icon)
+  .label= type.to_s.capitalize

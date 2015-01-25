@@ -31,13 +31,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
-  def current_user_last_media
-    @current_user_last_media ||= Rails.cache.fetch([token, 'user_last_media'], expires_in: 1.hour) do
-      client.user_recent_media.first
-    end
-  end
-  helper_method :current_user_last_media
-
   def sign_out_user
     redirect_to '/sign-out'
   end
@@ -45,7 +38,6 @@ class ApplicationController < ActionController::Base
   def purge_cache!
     Rails.cache.delete([token, 'me'])
     Rails.cache.delete([token, 'user_media'])
-    Rails.cache.delete([token, 'user_last_media'])
   end
 
 end
