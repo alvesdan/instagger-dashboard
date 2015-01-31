@@ -35,4 +35,11 @@ RSpec.describe UsersController do
       get :destroy
     end
   end
+
+  describe '#failure' do
+    it 'redirects to root' do
+      get :failure
+      expect(response).to redirect_to(root_path)
+    end
+  end
 end

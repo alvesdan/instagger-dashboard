@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :users, only: [:new]
   get '/sign-out', to: 'users#destroy'
   get '/auth/instagram/callback', to: 'users#create'
+  get '/auth/failure', to: 'users#failure'
 end
