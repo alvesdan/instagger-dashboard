@@ -26,4 +26,17 @@ RSpec.describe UserReportService do
     expect(subject.report[:variations][:likes]).to eq 33
     expect(subject.report[:variations][:comments]).to eq 70
   end
+
+  context 'when the number of likes on the first week is zero' do
+    let(:user_media) do
+      [
+        Instagram::Media.new({created_time: this_week, likes: {'count' => 5}, comments: {'count' => 7}}),
+        Instagram::Media.new({created_time: last_week, likes: {'count' => 0}, comments: {'count' => 10}})
+      ]
+    end
+
+    it 'calculates the correct likes variation' do
+      expect(subject.report[:variations][:likes]).to eq 500
+    end
+  end
 end
