@@ -30,6 +30,9 @@
           = render 'dashboard/graphic', type: :comments, icon: 'comment'
           = render 'dashboard/graphic', type: :likes, icon: 'heart'
 
+      .chart-wrapper.clearfix
+        .chart
+
       .footer.text-center
         %p
           Design by
@@ -44,4 +47,67 @@
   :javascript
     $(function () {
       $('[data-toggle="popover"]').popover();
+
+      var chartData = JSON.parse("#{j user_report_service_decorator.chart_data.last(7).to_json}");
+      console.log(chartData);
+      CanvasJS.addColorSet('customBlue', ['#0C3879', '#375A8C', '#557EBC']);
+      $('.chart-wrapper .chart').CanvasJSChart({
+        colorSet: 'customBlue',
+        height: 200,
+
+        axisY: {
+          labelFontFamily: 'Helvetica Neue, Helvetica',
+          interlacedColor: '#FFFFFF',
+          lineThickness: 0,
+          lineColor: '#FFFFFF',
+          gridColor: '#F4F4F4',
+          tickColor: '#FFFFFF',
+          includeZero: false
+        },
+
+        axisX: {
+          labelFontFamily: 'Helvetica Neue, Helvetica',
+          lineColor: '#FFFFFF',
+          tickColor: '#FFFFFF'
+        },
+
+        toolTip: {
+          borderColor: 'transparent'
+        },
+
+        data: [
+          {
+            type: "line",
+            toolTipContent: "{y} posts on {label}",
+            dataPoints: _.map(chartData, function(date){
+              return {
+                label: date.date,
+                y: date.total_posts
+              }
+            })
+          },
+
+          {
+            type: "line",
+            toolTipContent: "{y} likes on {label}",
+            dataPoints: _.map(chartData, function(date){
+              return {
+                label: date.date,
+                y: date.total_likes
+              }
+            })
+          },
+
+          {
+            type: "line",
+            toolTipContent: "{y} comments on {label}",
+            dataPoints: _.map(chartData, function(date){
+              return {
+                label: date.date,
+                y: date.total_comments
+              }
+            })
+          }
+        ]
+      });
     })

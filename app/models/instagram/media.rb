@@ -4,6 +4,10 @@ module Instagram
       Time.at(created_time.to_i)
     end
 
+    def date
+      created_at.to_date
+    end
+
     def likes_count
       likes['count']
     end
