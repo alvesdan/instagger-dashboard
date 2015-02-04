@@ -194,6 +194,13 @@ header {
   .canvasjs-chart-credit {
     display: none;
   }
+  .chart-tooltip {
+    font-style: normal;
+    font-size: 13px;
+    color: #666;
+    text-shadow: none;
+    font-family: $font-family-sans-serif;
+  }
 }
 
 .footer {

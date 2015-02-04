@@ -49,7 +49,7 @@
       $('[data-toggle="popover"]').popover();
 
       var chartData = JSON.parse("#{j user_report_service_decorator.chart_data.last(7).to_json}");
-      console.log(chartData);
+      var formatDate = function(date) { return date.split('-').reverse().join('/'); };
       CanvasJS.addColorSet('customBlue', ['#0C3879', '#375A8C', '#557EBC']);
       $('.chart-wrapper .chart').CanvasJSChart({
         colorSet: 'customBlue',
@@ -78,10 +78,10 @@
         data: [
           {
             type: "line",
-            toolTipContent: "{y} posts on {label}",
+            toolTipContent: "<span class=\"chart-tooltip\">{y} posts on {label}</span>",
             dataPoints: _.map(chartData, function(date){
               return {
-                label: date.date,
+                label: formatDate(date.date),
                 y: date.total_posts
               }
             })
@@ -89,10 +89,10 @@
 
           {
             type: "line",
-            toolTipContent: "{y} likes on {label}",
+            toolTipContent: "<span class=\"chart-tooltip\">{y} likes on {label}</span>",
             dataPoints: _.map(chartData, function(date){
               return {
-                label: date.date,
+                label: formatDate(date.date),
                 y: date.total_likes
               }
             })
@@ -100,10 +100,10 @@
 
           {
             type: "line",
-            toolTipContent: "{y} comments on {label}",
+            toolTipContent: "<span class=\"chart-tooltip\">{y} comments on {label}</span>",
             dataPoints: _.map(chartData, function(date){
               return {
-                label: date.date,
+                label: formatDate(date.date),
                 y: date.total_comments
               }
             })
