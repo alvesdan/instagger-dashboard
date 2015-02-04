@@ -23,4 +23,11 @@ RSpec.describe UserReportServiceDecorator do
       expect(subject.icon_for(:comments)).to eq 'chevron-up'
     end
   end
+
+  describe '#chart_data' do
+    it 'returns chart data grouped by day' do
+      chart_data = subject.chart_data
+      expect(chart_data.first.fetch(:date)).to eq Time.at(last_week).to_date
+    end
+  end
 end

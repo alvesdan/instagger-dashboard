@@ -23,6 +23,21 @@ class UserReportServiceDecorator < SimpleDelegator
     )
   end
 
+  def chart_data
+    @chart_data ||= user_media.reverse.group_by(&:date).map { |date, media|
+      {
+        date: date,
+        total_posts: media.size,
+        total_likes: media.reduce(0) { |sum, m| sum += m.likes_count },
+        total_comments: media.reduce(0) { |sum, m| sum += m.comments_count }
+      }
+    }.select do |date|
+      usable_data.map { |week|
+        week.fetch(:week_start)
+      }.include?(format_date(date.fetch(:date).beginning_of_week))
+    end
+  end
+
   def direction_for(key)
     number = variations.send(key)
     return 'flat' if number.zero?

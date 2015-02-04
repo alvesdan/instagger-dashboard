@@ -25,6 +25,10 @@ class UserReportService < Struct.new(:user_media)
     end
   end
 
+  def format_date(date)
+    date.strftime('%d/%m')
+  end
+
   private
 
   def ordered_user_media
@@ -33,9 +37,5 @@ class UserReportService < Struct.new(:user_media)
 
   def grouped_user_media
     @grouped_user_media ||= ordered_user_media.group_by(&:beginning_of_week)
-  end
-
-  def format_date(date)
-    date.strftime('%d/%m')
   end
 end

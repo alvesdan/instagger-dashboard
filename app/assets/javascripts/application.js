@@ -17,3 +17,4 @@
 //= require underscore
 //= require mustache
 //= require jquery.mustache
+//= require jquery.canvasjs.min
